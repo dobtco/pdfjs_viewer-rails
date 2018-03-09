@@ -6447,8 +6447,10 @@ var pdfjsWebLibs;
    var validateFileURL;
    var HOSTED_VIEWER_ORIGINS = [
     'null',
-    'http://mozilla.github.io',
-    'https://mozilla.github.io'
+    // 'https://dobt-screendoor-dev-victor.s3.amazonaws.com',
+    'https://screendoor.dobt.dev',
+    // 'http://mozilla.github.io',
+    // 'https://mozilla.github.io'
    ];
    validateFileURL = function validateFileURL(file) {
     try {
@@ -6458,7 +6460,7 @@ var pdfjsWebLibs;
      }
      var fileOrigin = new URL(file, window.location.href).origin;
      if (fileOrigin !== viewerOrigin) {
-      throw new Error('file origin does not match viewer\'s');
+       throw new Error('file origin does not match viewer\'s');
      }
     } catch (e) {
      var message = e && e.message;

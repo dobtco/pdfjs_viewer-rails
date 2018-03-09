@@ -1,5 +1,5 @@
 module PdfjsViewer
-  class ViewerController < ApplicationController
+  class ViewerController < PdfApplicationController
     layout false
 
     def full
