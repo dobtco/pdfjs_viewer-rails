@@ -6447,9 +6447,9 @@ var pdfjsWebLibs;
    var validateFileURL;
    var HOSTED_VIEWER_ORIGINS = [
     'null',
-    'https://screendoor.dobt.dev',
-    'https://screendoor.staging.dobt.co',
-    'https://screendoor.dobt.co',
+    'https://attachments.dobt.dev',
+    'https://attachments.staging.dobt.co',
+    'https://attachments.dobt.co',
    ];
    validateFileURL = function validateFileURL(file) {
     try {
