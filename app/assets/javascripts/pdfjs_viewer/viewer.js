@@ -6444,19 +6444,39 @@ var pdfjsWebLibs;
      });
     }
    };
+
+   // For DOBT's usage we don't want anyone to be able to load the pdf
+   // viewer as a standalone page.
+   var ensureLoadedInIframe;
+   ensureLoadedInIframe = function ensureViewerFocused() {
+     if (window.self === window.top) {
+       throw new Error('Unauthorized usage.');
+     }
+   };
    var validateFileURL;
    var HOSTED_VIEWER_ORIGINS = [
     'null',
-    'http://mozilla.github.io',
-    'https://mozilla.github.io'
+    'https://attachments.dobt.dev',
+    'https://attachments.staging.dobt.co',
+    'https://attachments.dobt.co',
+   ];
+   var FILE_ORIGIN_WHITELIST = [
+    'https://screendoor.dobt.dev',
+    'https://dobt-screendoor-staging.s3.amazonaws.com',
+    'https://dobt-screendoor.s3.amazonaws.com'
    ];
    validateFileURL = function validateFileURL(file) {
     try {
      var viewerOrigin = new URL(window.location.href).origin || 'null';
-     if (HOSTED_VIEWER_ORIGINS.indexOf(viewerOrigin) >= 0) {
-      return;
-     }
      var fileOrigin = new URL(file, window.location.href).origin;
+     if (HOSTED_VIEWER_ORIGINS.indexOf(viewerOrigin) >= 0) {
+      // For DOBT's usage we want to restrict the addresses that the viewer will load files from.
+      if (FILE_ORIGIN_WHITELIST.indexOf(fileOrigin) >= 0) {
+        return;
+      } else {
+        throw new Error('Unpermitted file.');
+      }
+     }
      if (fileOrigin !== viewerOrigin) {
       throw new Error('file origin does not match viewer\'s');
      }
@@ -6489,6 +6509,7 @@ var pdfjsWebLibs;
     var queryString = document.location.search.substring(1);
     var params = parseQueryString(queryString);
     file = 'file' in params ? params.file : DEFAULT_URL;
+    ensureLoadedInIframe();
     validateFileURL(file);
     var waitForBeforeOpening = [];
     var appConfig = PDFViewerApplication.appConfig;
