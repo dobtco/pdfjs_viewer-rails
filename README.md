@@ -1,6 +1,16 @@
-# pdfjs_viewer-rails
+**NOTE:** This is DOBT's fork of https://github.com/senny/pdfjs_viewer-rails
+We've made the following changes:
+- Replaced mozilla's domains with our own in the `HOSTED_VIEWER_ORIGINS` whitelist.
+  - this whitelist allows us to make cross origin requests for files (i.e. to s3).
+  - https://github.com/mozilla/pdf.js/pull/6916 is a summary of why this whitelist exists
+- Renames main engine controller from `PdfjsViewer::ApplicationController` to `PdfjsViewer::PdfApplicationController` to prevent namespace collisions with our main app's ApplicationController
+- Allows the engine routes to be embedded as iframes only under our base url
+  - implemented with a combination of `X-Frame-Options` and `Content-Security-Policy` headers
+- Restricts the domains that files will be loaded from to a whitelist
+- Viewer can only be loaded in an iframe
 
-[![Build Status](https://travis-ci.org/senny/pdfjs_viewer-rails.svg?branch=master)](https://travis-ci.org/senny/pdfjs_viewer-rails)
+
+# pdfjs_viewer-rails
 
 ## Installation
 
