@@ -6456,6 +6456,8 @@ var pdfjsWebLibs;
    var validateFileURL;
    var HOSTED_VIEWER_ORIGINS = [
     'null',
+    'https://attachments.screendoor-marius-uat.uat.cityba.se',
+    'https://attachments.screendoor.uat.cityba.se',
     'https://attachments.dobt.dev',
     'https://attachments.staging.dobt.co',
     'https://attachments.dobt.co',
