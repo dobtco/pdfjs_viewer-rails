@@ -6464,6 +6464,7 @@ var pdfjsWebLibs;
    ];
    var FILE_ORIGIN_WHITELIST = [
     'https://screendoor.dobt.dev',
+    'https://screendoor-marius-uat-citybase.s3.amazonaws.com',
     'https://dobt-screendoor-staging.s3.amazonaws.com',
     'https://dobt-screendoor.s3.amazonaws.com'
    ];
